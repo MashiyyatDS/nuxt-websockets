@@ -26,12 +26,15 @@
 				<div class="flex justify-center gap-1">
 					<UButton
 						icon="mdi:github"
-						:ui="{ leadingIcon: 'text-[50px]' }"
 						class="cursor-pointer"
 						external
 						to="/api/auth/github" />
 
-					<UButton icon="mdi:google" class="cursor-pointer" />
+					<UButton
+						icon="mdi:google"
+						class="cursor-pointer"
+						external
+						to="/api/auth/google" />
 				</div>
 			</template>
 		</UCard>

@@ -1,12 +1,10 @@
-export default defineOAuthGitHubEventHandler({
-	config: {
-		emailRequired: true,
-	},
+export default defineOAuthGoogleEventHandler({
+	config: {},
 	async onSuccess(event, { user }) {
 		await setUserSession(event, {
 			user: {
 				githubId: user.id,
-				avatar: user.avatar_url,
+				avatar: user.picture,
 				name: user.name,
 				expires_at: Date.now() + 60 * 60 * 1000,
 			},
@@ -16,7 +14,7 @@ export default defineOAuthGitHubEventHandler({
 		return sendRedirect(event, '/home')
 	},
 	onError(event, error) {
-		console.error('GitHub OAuth error:', error)
+		console.error('Google OAuth error:', error)
 		return sendRedirect(event, '/error')
 	},
 })

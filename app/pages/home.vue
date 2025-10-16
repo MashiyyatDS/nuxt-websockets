@@ -1,6 +1,8 @@
 <template>
 	<div class="flex gap-2">
-		<h1>Home Page</h1>
+		<small>
+			<pre>{{ useUserSession() }}</pre>
+		</small>
 	</div>
 </template>
 

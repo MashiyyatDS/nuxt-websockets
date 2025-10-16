@@ -39,7 +39,7 @@ const { user, clear } = useUserSession()
 async function logout() {
 	await clear()
 
-	navigateTo('/')
+	navigateTo('/', { replace: true })
 }
 
 const items: NavigationMenuItem[][] = [
