@@ -4,11 +4,13 @@
 			v-if="!loggedIn"
 			class="self-center w-[500px]"
 			:ui="{
-				header: 'sm:p-3 p-3',
+				header: 'sm:p-3 p-3 flex justify-center',
 				body: 'sm:p-3 p-3',
 				footer: 'sm:p-3 p-3',
 			}">
-			<template #header>Login</template>
+			<template #header>
+				<span class="text-[25px] font-bold">Login</span>
+			</template>
 
 			<UFormField label="Email" class="my-3">
 				<UInput placeholder="Enter your email" class="w-full" />
@@ -21,20 +23,18 @@
 			<template #footer>
 				<UButton label="Login" block />
 
-				<USeparator class="my-3" label="Or login with" />
+				<USeparator class="my-3" label="Login with" />
 
 				<div class="flex justify-center gap-1">
 					<UButton
-						icon="mdi:github"
-						class="cursor-pointer"
+						v-for="(oAuth, key) in oAuths"
+						:key="key"
+						size="xl"
+						variant="ghost"
+						:icon="`mdi:${oAuth}`"
+						class="cursor-pointer rounded-full"
 						external
-						to="/api/auth/github" />
-
-					<UButton
-						icon="mdi:google"
-						class="cursor-pointer"
-						external
-						to="/api/auth/google" />
+						:to="`/api/auth/${oAuth}`" />
 				</div>
 			</template>
 		</UCard>
@@ -48,6 +48,8 @@
 
 <script setup lang="ts">
 const { loggedIn, user } = useUserSession()
+
+const oAuths = ref(['github', 'google'])
 
 definePageMeta({
 	middleware: 'guest',

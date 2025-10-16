@@ -11,7 +11,6 @@ export default defineNuxtConfig({
 			websocket: true,
 		},
 	},
-	ssr: false,
 	runtimeConfig: {
 		authSecret: 'nuxt-app-secret',
 		oauth: {

@@ -7,7 +7,7 @@
 			<template #header>
 				<UAvatar :src="user?.avatar" size="xl" class="self-center" />
 
-				<span class="font-bold self-center">{{ user?.name }}</span>
+				<span class="self-center">{{ user?.name }}</span>
 			</template>
 
 			<template #default="{ collapsed }">
@@ -21,7 +21,7 @@
 			</template>
 
 			<template #footer>
-				<UButton label="Logout" block @click="logout" />
+				<UButton label="Logout" block class="cursor-pointer" @click="logout" />
 			</template>
 		</UDashboardSidebar>
 
@@ -38,6 +38,9 @@ const { user, clear } = useUserSession()
 
 async function logout() {
 	await clear()
+
+	const stateCookies = useCookie('nuxt-auth-state')
+	stateCookies.value = ''
 
 	navigateTo('/', { replace: true })
 }
