@@ -3,7 +3,7 @@ export default defineOAuthGoogleEventHandler({
 	async onSuccess(event, { user }) {
 		await setUserSession(event, {
 			user: {
-				githubId: user.id,
+				oAuthId: user.id,
 				avatar: user.picture,
 				name: user.name,
 				expires_at: Date.now() + 60 * 60 * 1000,

@@ -64,7 +64,7 @@
 <script setup lang="ts">
 const { loggedIn, user, fetch: fetchUserSession } = useUserSession()
 
-const { authenticate } = useWebAuthn({
+const { authenticate: authenticateUser } = useWebAuthn({
 	authenticateEndpoint: '/api/webauthn/authenticate',
 })
 
@@ -74,7 +74,9 @@ const credentials = reactive({
 })
 
 async function signIn() {
-	await authenticate(credentials).then(fetchUserSession) // refetch the user session
+	const response = await authenticateUser('Mashiyyat')
+
+	console.log(response)
 }
 
 const oAuths = ref(['github', 'google'])

@@ -4,6 +4,12 @@ export default defineNuxtRouteMiddleware(async () => {
 	const tokenExpired = Date.now() > user.value?.expires_at
 
 	if (tokenExpired || !loggedIn.value) {
-		//return await navigateTo('/')
+		const nuxtStateCookie = useCookie('nuxt-auth-state')
+		nuxtStateCookie.value = ''
+
+		const nuxtSessionCookie = useCookie('nuxt-auth-state')
+		nuxtSessionCookie.value = ''
+
+		return await navigateTo('/')
 	}
 })

@@ -19,3 +19,12 @@ export type MessageReaction = {
 	message: Message
 	user: User
 }
+
+declare module '#auth-utils' {
+	interface User {
+		oAuthId: string
+		name: string
+		avatar: string
+		expires_at: string
+	}
+}
