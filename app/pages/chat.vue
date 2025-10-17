@@ -107,7 +107,7 @@ useHead({
 
 <style scoped lang="scss">
 .chat {
-	height: 100vh;
+	height: 100%;
 
 	&-header {
 		height: 50px;
