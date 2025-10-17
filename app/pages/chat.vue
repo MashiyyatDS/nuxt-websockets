@@ -13,7 +13,9 @@
 						'text-sm',
 					],
 				}"
-				:avatar="{ src: user.avatar }"
+				:avatar="{
+					src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDtxFrKu1E0YxQXhTKH9cpeR2zcWKX1ULJgQ&s',
+				}"
 				variant="soft"
 				:side="message.userId === userId ? 'right' : 'left'"
 				:parts="[{ type: 'text', text: message.message }]" />
@@ -43,11 +45,12 @@
 
 <script setup lang="ts">
 import { useWebSocket } from '@vueuse/core'
-const { user } = useUserSession()
+import { v4 as uuidv4 } from 'uuid'
+//const { user } = useUserSession()
 
 const messages = ref<{ userId: string; message: string; username: string }[]>([])
 const messageInput = ref('')
-const userId = user.value.githubId
+const userId = uuidv4()
 
 const { send, data } = useWebSocket(`/ws/chat`, {
 	async onMessage() {
@@ -75,14 +78,14 @@ function scrollToBottom() {
 function sendMessage() {
 	messages.value.push({
 		userId,
-		username: user.value?.name,
+		username: 'NiggerMan',
 		message: messageInput.value,
 	})
 
 	send(
 		JSON.stringify({
 			userId,
-			username: user.value?.name,
+			username: 'NiggerMan',
 			message: messageInput.value,
 		})
 	)
@@ -92,7 +95,7 @@ function sendMessage() {
 }
 
 definePageMeta({
-	middleware: ['auth-middleware'],
+	//middleware: ['auth-middleware'],
 	layout: 'dashboard-layout',
 })
 
