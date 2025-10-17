@@ -55,7 +55,7 @@ const { send, data } = useWebSocket(`/ws/chat`, {
 	async onMessage() {
 		console.log(data.value)
 
-		const dataReceived = typeof data.value === 'string' ? data : await data.value.text()
+		const dataReceived = typeof data.value === 'string' ? data.value : await data.value.text()
 
 		const { message, userId, username } = JSON.parse(dataReceived)
 
