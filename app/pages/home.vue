@@ -1,6 +1,6 @@
 <template>
 	<div class="flex gap-2">
-		<pre>{{ useUserSession() }}</pre>
+		<pre>{{ useUserSession().user.value }}</pre>
 	</div>
 </template>
 

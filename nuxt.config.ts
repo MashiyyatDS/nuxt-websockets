@@ -4,7 +4,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
 	compatibilityDate: '2025-07-15',
 	devtools: { enabled: true },
-	modules: ['@nuxt/ui', '@nuxt/eslint', '@vueuse/nuxt', 'nuxt-auth-utils'],
+	modules: ['@nuxt/ui', '@nuxt/eslint', '@vueuse/nuxt', 'nuxt-auth-utils', '@nuxthub/core'],
 	css: ['~/assets/main.css'],
 	nitro: {
 		experimental: {
@@ -26,5 +26,8 @@ export default defineNuxtConfig({
 	},
 	auth: {
 		webAuthn: true,
+	},
+	hub: {
+		workers: true,
 	},
 })
