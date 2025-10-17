@@ -46,7 +46,6 @@
 <script setup lang="ts">
 import { useWebSocket } from '@vueuse/core'
 import { v4 as uuidv4 } from 'uuid'
-//const { user } = useUserSession()
 
 const messages = ref<{ userId: string; message: string; username: string }[]>([])
 const messageInput = ref('')
@@ -54,11 +53,12 @@ const userId = uuidv4()
 
 const { send, data } = useWebSocket(`/ws/chat`, {
 	async onMessage() {
-		const dataReceived = await data.value.text()
+		const dataReceived = typeof data.value === 'string' ? data : await data.value.text()
 
 		const { message, userId, username } = JSON.parse(dataReceived)
 
 		messages.value.push({ message, userId, username })
+
 		scrollToBottom()
 	},
 })
@@ -95,7 +95,6 @@ function sendMessage() {
 }
 
 definePageMeta({
-	//middleware: ['auth-middleware'],
 	layout: 'dashboard-layout',
 })
 
