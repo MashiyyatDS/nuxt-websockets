@@ -1,7 +1,6 @@
 <template>
 	<div class="flex justify-center h-screen">
 		<UCard
-			v-if="!loggedIn"
 			class="self-center w-[500px]"
 			:ui="{
 				header: 'sm:p-3 p-3 flex justify-center',
@@ -13,15 +12,36 @@
 			</template>
 
 			<UFormField label="Email" class="my-3">
-				<UInput placeholder="Enter your email" class="w-full" />
+				<UInput
+					v-model="credentials.email"
+					placeholder="Enter your email"
+					class="w-full"
+					size="xl" />
 			</UFormField>
 
 			<UFormField label="Password" class="my-3">
-				<UInput placeholder="Enter your password" type="password" class="w-full" />
+				<UInput
+					v-model="credentials.password"
+					placeholder="Enter your password"
+					type="password"
+					class="w-full"
+					size="xl">
+					<template #trailing>
+						<UButton
+							:icon="
+								showPassword
+									? 'material-symbols:visibility-off-outline-rounded'
+									: 'material-symbols:visibility-outline'
+							"
+							class="rounded-full cursor-pointer"
+							variant="ghost"
+							@click="showPassword = !showPassword" />
+					</template>
+				</UInput>
 			</UFormField>
 
 			<template #footer>
-				<UButton label="Login" block />
+				<UButton label="Login" block @click="signIn" />
 
 				<USeparator class="my-3" label="Login with" />
 
@@ -38,20 +58,33 @@
 				</div>
 			</template>
 		</UCard>
-
-		<pre class="self-center">
-			{{ user }}
-		</pre
-		>
 	</div>
 </template>
 
 <script setup lang="ts">
-const { loggedIn, user } = useUserSession()
+const { loggedIn, user, fetch: fetchUserSession } = useUserSession()
+
+const { authenticate } = useWebAuthn({
+	authenticateEndpoint: '/api/webauthn/authenticate',
+})
+
+const credentials = reactive({
+	email: '',
+	password: '',
+})
+
+async function signIn() {
+	await authenticate(credentials).then(fetchUserSession) // refetch the user session
+}
 
 const oAuths = ref(['github', 'google'])
+const showPassword = ref(false)
 
 definePageMeta({
 	middleware: 'guest',
+})
+
+useHead({
+	title: 'Nuxt Labs',
 })
 </script>

@@ -26,6 +26,14 @@
 		</UDashboardSidebar>
 
 		<div class="w-full h-full">
+			<UDashboardNavbar
+				title="Nuxt Labs"
+				:toggle="{
+					color: 'primary',
+					variant: 'subtle',
+					class: 'rounded-full',
+				}" />
+
 			<slot />
 		</div>
 	</UDashboardGroup>

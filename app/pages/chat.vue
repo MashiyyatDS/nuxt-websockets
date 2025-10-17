@@ -1,12 +1,5 @@
 <template>
 	<div class="chat">
-		<div class="chat-header">
-			<div class="flex p-1" style="height: 100%">
-				<span class="self-center">Welcome</span>
-				<span class="self-center ml-1 font-bold">{{ user?.name }}</span>
-			</div>
-		</div>
-
 		<div ref="chatBody" class="chat-body gap-1">
 			<UChatMessage
 				v-for="(message, key) in messages"
@@ -119,7 +112,7 @@ useHead({
 	}
 
 	&-body {
-		height: calc(100% - 50px - 50px);
+		height: calc(100% - 63.99px - 50px);
 		padding: 10px;
 		overflow: auto;
 	}

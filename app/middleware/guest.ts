@@ -1,7 +1,9 @@
 export default defineNuxtRouteMiddleware(async () => {
-	const { loggedIn } = useUserSession()
+	const { loggedIn, user } = useUserSession()
 
-	if (loggedIn.value) {
-		return useRouter().push('/home')
-	}
+	const tokenExpired = Date.now() > user.value?.expires_at
+
+	//return await navigateTo(loggedIn && !tokenExpired ? '/' : '/home')
+
+	return true
 })
